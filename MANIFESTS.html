@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IIIF Image Gallery</title>
+  <title>IIIF Combined Gallery</title>
   <script src="https://unpkg.com/mirador@latest/dist/mirador.min.js"></script>
   <style>
     html, body, #mirador {
@@ -14,99 +14,15 @@
 <body>
   <div id="mirador"></div>
   <script>
-    const manifestUrls = [
-"https://damsssl.llgc.org.uk/iiif/2.0/1452734/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1460769/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1449809/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1455494/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1486929/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1510443/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1512984/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1500452/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1484939/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1504134/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1501465/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1496464/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1587900/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1547777/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1467373/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1469141/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1507395/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1553909/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1542759/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1459429/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1456381/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1557324/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1490435/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1455296/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1455248/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1561738/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1461499/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1554753/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1530516/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1478793/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1505096/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1460511/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1453779/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1556493/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1517935/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1456235/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1466644/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1515983/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1509009/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1494411/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1482250/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1469691/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1470775/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1471937/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1578665/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1481511/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1573793/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1493580/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1497160/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1491017/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1450046/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1471557/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1452378/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1455451/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1457005/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1457073/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1457311/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1462608/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1467992/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1476173/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1477324/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1486506/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1501320/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1497644/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1515746/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1523356/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1546377/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1585970/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1452734/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1459943/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1462302/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1488389/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1504451/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1586931/manifest.json",
-"https://damsssl.llgc.org.uk/iiif/2.0/1527449/manifest.json"
-];
-
-    const miradorConfig = {
+    Mirador.viewer({
       id: "mirador",
-      windows: manifestUrls.map((url, i) => ({
-        manifestId: url,
+      windows: [{
+        manifestId: "https://github.com/jasonnlw/WrexhamGallery/blob/main/combined-manifest.json",
         canvasIndex: 0,
         view: "gallery",
-        thumbnailNavigationPosition: "far-bottom",
-        allowClose: true,
-      })),
-      workspaceControlPanel: {
-        enabled: true,
-      }
-    };
-
-    Mirador.viewer(miradorConfig);
+        thumbnailNavigationPosition: "far-bottom"
+      }]
+    });
   </script>
 </body>
 </html>
